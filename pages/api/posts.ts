@@ -5,6 +5,7 @@ type POST = {
   title: string;
   description: string;
   image: string;
+  comments: string[];
 };
 
 export default function handler(
@@ -16,31 +17,37 @@ export default function handler(
       title: 'nice post',
       description: 'This is a nice post',
       image: '/coffee.png',
+      comments: ['great pic', 'fab'],
     },
     {
       title: 'nice post2',
       description: 'This is a nice post2',
       image: '/coffee.png',
+      comments: [],
     },
     {
       title: 'nice post3',
       description: 'This is a nice post3',
       image: '/coffee.png',
+      comments: [],
     },
     {
       title: 'nice post4',
       description: 'This is a nice post4',
       image: '/coffee.png',
+      comments: [],
     },
     {
       title: 'nice post5',
       description: 'This is a nice post5',
       image: '/coffee.png',
+      comments: [],
     },
     {
       title: 'nice post6',
       description: 'This is a nice post6',
       image: '/coffee.png',
+      comments: [],
     },
   ]);
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Comment from './comment';
 import CommentForm from './commentForm';
 import Image from 'next/image';
@@ -7,10 +7,26 @@ type POST = {
   title: string;
   description: string;
   image: string;
+  comments: string[];
 };
 
 function Card(props: POST) {
-  const [comments, setComments] = useState(false);
+  const [openComments, setOpenComments] = useState(false);
+  const [comments, setComments] = useState(props.comments);
+
+  const [inputs, setInputs] = useState('');
+  function inputHandler(
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>
+  ) {
+    setInputs(e.target.value);
+  }
+
+  function submitHandler(e: React.SyntheticEvent) {
+    e.preventDefault();
+    setComments([...comments, inputs]);
+  }
 
   return (
     <div>
@@ -33,13 +49,18 @@ function Card(props: POST) {
           </div>
           <p
             onClick={() => {
-              setComments(!comments);
+              setOpenComments(!openComments);
             }}
           >
             Add Comment
           </p>
-          {comments && <CommentForm />}
-          <Comment />
+          {openComments && (
+            <CommentForm
+              inputHandler={inputHandler}
+              submitHandler={submitHandler}
+            />
+          )}
+          <Comment comments={comments} />
         </div>
       </div>
     </div>

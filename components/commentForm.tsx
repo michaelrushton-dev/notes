@@ -1,11 +1,17 @@
 import React from 'react';
 
-function CommentForm() {
+type Props = {
+  inputHandler: (e: React.ChangeEvent<HTMLInputElement>) => any;
+  submitHandler: React.FormEventHandler;
+};
+
+function CommentForm({ inputHandler, submitHandler }: Props) {
   return (
     <div className='block p-6 rounded-lg shadow-lg bg-white max-w-md'>
-      <form>
+      <form onSubmit={submitHandler}>
         <div className='form-group mb-6'>
-          <textarea
+          <input
+            onChange={inputHandler}
             className='
             form-control
             block
@@ -25,7 +31,7 @@ function CommentForm() {
           '
             id='exampleFormControlTextarea13'
             placeholder='Message'
-          ></textarea>
+          ></input>
         </div>
         <button
           type='submit'
