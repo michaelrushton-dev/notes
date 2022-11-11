@@ -1,7 +1,7 @@
 import React from 'react';
 import Card from './card';
 
-type DATA = {
+type POST = {
   data: [
     {
       title: string;
@@ -11,10 +11,12 @@ type DATA = {
   ];
 };
 
-function CardHolder(props: DATA) {
-  console.log('card holder props', props);
+function CardHolder(props: POST) {
+  console.log('card holder props', props.data);
   return (
     <div>
+      <p>hey</p>
+      {/* {props.data[0].title} */}
       {/* {props.data.map((post, index) => {
         return (
           <Card

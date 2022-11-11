@@ -7,18 +7,35 @@ import PostForm from '../components/postForm';
 import styles from '../styles/Home.module.css';
 
 type POST = {
-  title: string;
-  description: string;
-  image: string;
+  data: [
+    {
+      title: string;
+      description: string;
+      image: string;
+    }
+  ];
 };
 
-export default function Home(props: Array<POST>) {
+export default function Home(props: POST) {
   console.log('index props', props);
   return (
-    <div className={styles.container}>
-      <h1>Main Page</h1>
-      <PostForm />
-      <CardHolder props={props} />
+    <div className='flex justify-center flex-col'>
+      <h1 className='text-center'>Main Page</h1>
+      <div className='flex justify-center mt-4'>
+        <PostForm />
+      </div>
+      <div className='grid md:grid-cols-3 grid-cols-1 gap-4 mt-4'>
+        {props.data.map((post, index) => {
+          return (
+            <Card
+              key={index}
+              title={post.title}
+              description={post.description}
+              image={post.image}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 }
