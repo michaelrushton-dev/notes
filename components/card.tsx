@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Comment from './comment';
 import CommentForm from './commentForm';
 import Image from 'next/image';
@@ -10,7 +10,8 @@ type POST = {
 };
 
 function Card(props: POST) {
-  console.log(props);
+  const [comments, setComments] = useState(false);
+
   return (
     <div>
       <div className='flex justify-center'>
@@ -30,7 +31,14 @@ function Card(props: POST) {
             </h1>
             <p className='text-gray-700 text-base mb-4'>{props.description}</p>
           </div>
-          <CommentForm />
+          <p
+            onClick={() => {
+              setComments(!comments);
+            }}
+          >
+            Add Comment
+          </p>
+          {comments && <CommentForm />}
           <Comment />
         </div>
       </div>
