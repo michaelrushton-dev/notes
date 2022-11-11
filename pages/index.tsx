@@ -18,19 +18,21 @@ type POST = {
 };
 
 export default function Home(props: POST) {
-    const [inputs, setInputs] = useState({ title: '', description: '' });
+    const [data, setData] = useState(props.data)
+    console.log(data);
+    const [inputs, setInputs] = useState({ title: '', description: '', image: ''});
     function inputHandler(
         e:
             | React.ChangeEvent<HTMLInputElement>
             | React.ChangeEvent<HTMLTextAreaElement>
     ) {
-        console.log({ [e.target.name]: e.target.value });
         setInputs({ ...inputs, [e.target.name]: e.target.value });
     }
 
     function submitHandler(e: React.SyntheticEvent) {
         e.preventDefault();
-        console.log(inputs);
+        setData([inputs, ...data]);
+        console.log(data);
     }
 
     return (
@@ -43,7 +45,9 @@ export default function Home(props: POST) {
                 />
             </div>
             <div className='grid md:grid-cols-3 grid-cols-1 gap-4 mt-4'>
-                {props.data.map((post, index) => {
+                {
+                data&&
+                data.map((post, index) => {
                     return (
                         <Card
                             key={index}
