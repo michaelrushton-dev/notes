@@ -1,11 +1,7 @@
 import React, { useState } from 'react';
 import { GetServerSideProps } from 'next';
-import Head from 'next/head';
-import Image from 'next/image';
 import Card from '../components/card';
-import CardHolder from '../components/cardHolder';
 import PostForm from '../components/postForm';
-import styles from '../styles/Home.module.css';
 
 type POST = {
   data: [
@@ -19,31 +15,24 @@ type POST = {
 };
 
 export default function Home(props: POST) {
-  const [data, setData] = useState(props.data);
+  const [data, setData] = useState<any[]>(props.data);
   //   const [localImage, setLocalImage] = useState<FileList | null>();
   console.log(data);
-  const [inputs, setInputs] = useState({
-    title: '',
-    description: '',
-    image: '',
-  });
-  function inputHandler(
-    e:
-      | React.ChangeEvent<HTMLInputElement>
-      | React.ChangeEvent<HTMLTextAreaElement>
-  ) {
+  const [inputs, setInputs] = useState({});
+  function inputHandler(e:React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) {
     setInputs({ ...inputs, [e.target.name]: e.target.value });
   }
 
   function submitHandler(e: React.SyntheticEvent) {
     e.preventDefault();
-    setData([inputs, ...data]);
+    const input = [inputs, ...data]
+    setData(input);
     console.log(data);
   }
 
   async function fileHandler(e: React.ChangeEvent<HTMLInputElement>) {
-    const imageData = new FormData();
-    imageData.append('file', e.target.files[0]);
+    const imageData = new FormData()
+    imageData.append('file', e.target.files![0]);
     imageData.append('upload_preset', 'pictures');
 
     const data = await fetch(
