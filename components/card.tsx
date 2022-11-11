@@ -20,8 +20,8 @@ function Card(props: POST) {
             <Image
               className='rounded-t-lg'
               src={props.image}
-              height={250}
-              width={250}
+              height={360}
+              width={640}
               alt={props.title}
             />
           </a>
